@@ -88,6 +88,12 @@ def get_reaction(reaction):
         return jsonify({"error": "No files found in reaction folder"}), 404
 
 
+# Support an optional .gif extension at the end
+@app.route("/<string:reaction>.gif")
+def get_reaction_gif(reaction):
+    return get_reaction(reaction)
+
+
 @app.route("/<string:reaction>/list")
 def list_reaction(reaction):
     # Ensure this reaction folder exists
