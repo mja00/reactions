@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, send_from_directory, request
+from flask import Flask, jsonify, send_from_directory, request, url_for
 from random import shuffle
 from datetime import datetime
 
@@ -81,9 +81,9 @@ def get_reaction(reaction):
         if len(files) > 1 and files[0] == LAST_REACTION.get(reaction):
             # Set the last reaction to the second one
             LAST_REACTION[reaction] = files[1]
-            return send_from_directory(reaction_dir, files[1])
+            return jsonify({"url": url_for('static', filename=f"{app.config['DATA_DIR']}/{reaction}/{files[1]}", _external=True)}, )
         LAST_REACTION[reaction] = files[0]
-        return send_from_directory(reaction_dir, files[0])
+        return jsonify({"url": url_for('static', filename=f"{app.config['DATA_DIR']}/{reaction}/{files[0]}", _external=True)})
     except KeyError:
         return jsonify({"error": "No files found in reaction folder"}), 404
 
