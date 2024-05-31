@@ -73,7 +73,6 @@ def get_reaction(reaction):
         return jsonify({"error": "Reaction not found"}), 404
 
     # If it is then we want a random .gif file from the folder
-    reaction_dir = os.path.join(get_data_dir(), reaction)
     try:
         files = get_reactions_in_folder()[reaction]
         shuffle(files)
