@@ -10,4 +10,4 @@ services:
       - ./.env.prod
     # Mount an external volume to store the static files. This lets us add or remove files without rebuilding the image.
     volumes:
-      - ./static_volume:/home/app/web/static
+      - ./static_volume:/home/app/web/project/static
